@@ -1,7 +1,11 @@
-from sqlalchemy import String, ForeignKey, Date
+from sqlalchemy import String, Date
 from sqlalchemy.orm import Mapped, relationship, mapped_column
 from datetime import date
-from .contacts import Base
+from sqlalchemy.orm import DeclarativeBase
+
+
+class Base(DeclarativeBase):
+    pass
 
 
 class Contact(Base):
@@ -19,5 +23,8 @@ class Contact(Base):
     additional_data: Mapped[str] = mapped_column(String(200), nullable=True)
 
     def __str__(self):
-        return f"Contsct: ({self.id}, {self.first_name} 
-        {self.second_name} {self.email} {self.phone_number} {self.birthday} {self.additional_data})"
+        return (
+            f"Contact: ({self.id}, {self.first_name} "
+            f"{self.second_name} {self.email} "
+            f"{self.phone_number} {self.birthday} {self.additional_data})"
+        )
