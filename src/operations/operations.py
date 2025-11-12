@@ -37,8 +37,20 @@ async def get_contacts_list(
         )
 
 
+@app.get("/api/contacts/{contact_id}", response_model=ResponseContactModel)
+async def get_contact_by_id(
+    contact_id: int = Path(description="The ID of the contact to get", gt=0, le=10),
+    db: Session = Depends(get_db),
+):
+    print(contact_id)
+    contact = db.query(Contact).filter(Contact.id == contact_id).first()
+    if contact is None:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
+    return contact
+
+
 @app.post(
-    "/api/contact/create",
+    "/api/contacts",
     response_model=ResponseContactModel,
     responses={400: {"model": ErrorResponse}},
 )
@@ -58,21 +70,9 @@ async def create_contact(contact: ContactModel, db: Session = Depends(get_db)):
     return new_contact
 
 
-@app.post("/api/contact/delete/{ontact_id}", response_model=ResponseContactModel)
+@app.delete("/api/contacts/{contact_id}", response_model=ResponseContactModel)
 def delete_contact(): ...
 
 
-@app.patch("/api/contact/update/{contact_id}", response_model=ResponseContactModel)
+@app.patch("/api/contacts/{contact_id}", response_model=ResponseContactModel)
 def update_contact(): ...
-
-
-@app.get("/api/contact/get/{contact_id}", response_model=ResponseContactModel)
-async def get_contact_by_id(
-    contact_id: int = Path(description="The ID of the contact to get", gt=0, le=10),
-    db: Session = Depends(get_db),
-):
-    print(contact_id)
-    contact = db.query(Contact).filter(Contact.id == contact_id).first()
-    if contact is None:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Not found")
-    return contact
