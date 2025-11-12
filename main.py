@@ -1,12 +1,5 @@
-from fastapi import FastAPI
-
-app = FastAPI()
-
-
-@app.get("/api/healthchecker")
-def root():
-    return {"message": "Welcome to FastAPI!"}
-
+from src.configuration import get_db
+from src.operations.operations import app
 
 if __name__ == "__main__":
     import uvicorn
