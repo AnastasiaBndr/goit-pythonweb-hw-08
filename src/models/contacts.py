@@ -1,11 +1,12 @@
 from sqlalchemy import String, Date
-from sqlalchemy.orm import Mapped, relationship, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column
 from datetime import date
 from sqlalchemy.orm import DeclarativeBase
 
 
 class Base(DeclarativeBase):
     pass
+
 
 
 class Contact(Base):

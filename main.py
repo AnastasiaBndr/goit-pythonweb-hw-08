@@ -1,4 +1,3 @@
-from src.configuration import get_db
 from src.operations.operations import app
 
 if __name__ == "__main__":
