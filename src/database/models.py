@@ -15,10 +15,10 @@ class Contact(Base):
     first_name: Mapped[str] = mapped_column(String(30), nullable=False)
     second_name: Mapped[str] = mapped_column(String(30), nullable=False)
     email: Mapped[str] = mapped_column(
-        String(100), unique=True, nullable=False)
+        String(100), nullable=False)
 
     phone_number: Mapped[str] = mapped_column(
-        String(13), unique=True, nullable=False)
+        String(13), nullable=False)
     birthday: Mapped[date] = mapped_column(Date)
     additional_data: Mapped[str] = mapped_column(String(200), nullable=True)
 
