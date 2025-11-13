@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException, status, Query, Path, Request
 from sqlalchemy.orm import Session
-from src.configuration import get_db
-from src.models.contacts import Contact
+from src.database.db import get_db
+from src.database.models import Contact
 from fastapi.responses import JSONResponse
 from .pydantic_models import ContactModel, ResponseContactModel, ErrorResponse
 
